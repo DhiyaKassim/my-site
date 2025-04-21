@@ -41,7 +41,80 @@
 					<footer><a href="#" class="button">Get Started</a>
 					</footer></div>
 			</section><!-- Three --><section id="three" class="wrapper align-center"><div class="inner">
-					<div class="flex flex-2">
+					<!-- Wedding Image Slider -->
+<section id="slider" class="wrapper align-center">
+  <div class="slider-container">
+    <div class="slides" id="slides">
+      <div class="slide"><img src="images/slide1.jpg" alt="Wedding Photo 1"></div>
+      <div class="slide"><img src="images/slide3.jpg" alt="Wedding Photo 2"></div>
+      <div class="slide"><img src="images/slide4.jpg" alt="Wedding Photo 3"></div>
+      <div class="slide"><img src="images/slide4.jpg" alt="Wedding Photo 4"></div>
+    </div>
+    <div class="controls">
+      <button class="control" onclick="prevSlide()">&#10094;</button>
+      <button class="control" onclick="nextSlide()">&#10095;</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .slider-container {
+    max-width: 800px;
+    margin: 40px auto;
+    position: relative;
+    overflow: hidden;
+    border: 8px solid #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
+  .slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  .slide {
+    min-width: 100%;
+  }
+  .slide img {
+    width: 100%;
+    height: auto;
+  }
+  .controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+  }
+  .control {
+    background-color: rgba(0,0,0,0.5);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  let currentIndex = 0;
+  const slides = document.getElementById('slides');
+  const totalSlides = slides.children.length;
+
+  function updateSlidePosition() {
+    slides.style.transform = 'translateX(' + (-currentIndex * 100) + '%)';
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    updateSlidePosition();
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    updateSlidePosition();
+  }
+</script>
+
+				<div class="flex flex-2">
 						<article><div class="image round">
 								<img src="images/pic01.jpg" alt="Pic 01" width="150" height="150"></div>
 							<header><h3>Lorem ipsum<br> dolor amet nullam</h3>
