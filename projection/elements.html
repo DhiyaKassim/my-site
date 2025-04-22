@@ -14,7 +14,47 @@
         </nav><a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
     </div>
 </header><section id="main" class="wrapper"><div class="inner">
-        <header class="align-center"><h2>Elements</h2>
+       <h2>Wedding Photography Calculator</h2>
+<form id="photographyForm">
+  <div class="row uniform">
+    <div class="6u 12u$(xsmall)">
+      <label>Hours of Coverage ($150/hour):</label>
+      <input type="number" id="hours" value="0" min="0">
+    </div>
+    <div class="6u 12u$(xsmall)">
+      <label>Number of Photographers ($200 each):</label>
+      <input type="number" id="photographers" value="1" min="1">
+    </div>
+    <div class="6u 12u$(xsmall)">
+      <label>Photo Album ($300):</label>
+      <input type="checkbox" id="album">
+    </div>
+    <div class="6u 12u$(xsmall)">
+      <label>Engagement Shoot ($250):</label>
+      <input type="checkbox" id="engagement">
+    </div>
+    <div class="12u$">
+      <input type="button" value="Calculate Total" onclick="calculateTotal()" class="button special">
+    </div>
+    <div class="12u$">
+      <h3>Total Cost: $<span id="total">0.00</span></h3>
+    </div>
+  </div>
+</form>
+
+<script>
+  function calculateTotal() {
+    const hours = parseFloat(document.getElementById('hours').value) || 0;
+    const photographers = parseInt(document.getElementById('photographers').value) || 0;
+    const album = document.getElementById('album').checked ? 300 : 0;
+    const engagement = document.getElementById('engagement').checked ? 250 : 0;
+
+    const total = (hours * 150) + (photographers * 200) + album + engagement;
+    document.getElementById('total').innerText = total.toFixed(2);
+  }
+</script>
+
+	<header class="align-center"><h2>Elements</h2>
             <p>Aliquam erat volutpat nam dui </p>
         </header><!-- Intro --><div class="row">
             <section class="6u 12u$(medium)"><h2>What is Baseline?</h2>
