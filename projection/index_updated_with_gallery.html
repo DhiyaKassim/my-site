@@ -1,0 +1,237 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>A Sophisticated Photography Business</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <style>
+    .slider-container {
+      max-width: 800px;
+      margin: 40px auto;
+      position: relative;
+      overflow: hidden;
+      border: 8px solid #fff;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .slide {
+      min-width: 100%;
+    }
+    .slide img {
+      width: 100%;
+      height: auto;
+    }
+    .controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    .control {
+      background-color: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+  <div class="inner">
+    <a href="index.html" class="logo">
+      <img src="images/logo.png" alt="NYC Wedding Logo" style="height: 60px;">
+    </a>
+    <nav id="nav">
+      <a href="index.html">Home</a>
+      <a href="generic.html">Generic</a>
+      <a href="elements.html">Calculator</a>
+      <a href="about.html">About Us</a>
+    </nav>
+    <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+  </div>
+</header>
+
+<!-- Banner -->
+<section id="banner">
+  <div class="inner">
+    <header>
+      <h1>Welcome to A Sophisticated Photography Business</h1>
+    </header>
+    <div class="flex">
+      <div>
+        <span class="icon fa-car"></span>
+        <h3>TEAM</h3>
+        <p>OUR TEAM IS ALWAY READY</p>
+      </div>
+      <div>
+        <span class="icon fa-camera"></span>
+        <h3>Equipped</h3>
+        <p>Equipped with the newest cameras</p>
+      </div>
+      <div>
+        <span class="icon fa-bug"></span>
+        <h3>DATA</h3>
+        <p>ALL YOUR PHOTO AND ARE SECURED</p>
+      </div>
+    </div>
+    <footer>
+      <a href="#" class="button" onclick="startSocialNewsProgram()">Launch Social News</a>
+    </footer>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="wrapper align-center">
+  <div class="inner">
+    <h2>Wedding Photo Gallery</h2>
+    <p>Swipe through some of our favorite wedding moments.</p>
+    <div class="slider-container">
+      <div class="slides" id="slides">
+        <div class="slide"><img src="images/slide1.jpg" alt="Wedding 1"></div>
+        <div class="slide"><img src="images/slide2.jpg" alt="Wedding 2"></div>
+        <div class="slide"><img src="images/slide3.jpg" alt="Wedding 3"></div>
+        <div class="slide"><img src="images/slide4.jpg" alt="Wedding 4"></div>
+      </div>
+      <div class="controls">
+        <button class="control" onclick="prevSlide()">&#10094;</button>
+        <button class="control" onclick="nextSlide()">&#10095;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    <h3>Get in touch</h3>
+    <form action="#" method="post">
+      <div class="field half first">
+        <label for="name">Name</label>
+        <input name="name" id="name" type="text" placeholder="Name">
+      </div>
+      <div class="field half">
+        <label for="email">Email</label>
+        <input name="email" id="email" type="email" placeholder="Email">
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea name="message" id="message" rows="6" placeholder="Message"></textarea>
+      </div>
+      <ul class="actions">
+        <li><input value="Send Message" class="button alt" type="submit"></li>
+      </ul>
+    </form>
+  </div>
+</footer>
+
+<div class="copyright">
+  <a href="/">© 2025 A Sophisticated Photography Business</a>
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+<!-- Slider Script -->
+<script>
+  let currentIndex = 0;
+  const slides = document.getElementById('slides');
+  const totalSlides = slides.children.length;
+
+  function updateSlidePosition() {
+    slides.style.transform = 'translateX(' + (-currentIndex * 100) + '%)';
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    updateSlidePosition();
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    updateSlidePosition();
+  }
+</script>
+
+<!-- Social News Script -->
+<script>
+  const links = [];
+
+  function formatLink(link, index) {
+    return `${index + 1}: "${link.title}" (${link.url}) by ${link.author}`;
+  }
+
+  function showLinks() {
+    if (links.length === 0) {
+      alert("No links to display.");
+    } else {
+      const list = links.map((link, i) => formatLink(link, i)).join('\n');
+      alert("List of links:\n\n" + list);
+    }
+  }
+
+  function addLink() {
+    const title = prompt("Enter the link title:");
+    if (!title) return;
+
+    let url = prompt("Enter the link URL:");
+    if (!url) return;
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      url = "http://" + url;
+    }
+
+    const author = prompt("Enter the link author (submitter):");
+    if (!author) return;
+
+    links.push({ title, url, author });
+    alert("Link added successfully!");
+  }
+
+  function removeLink() {
+    if (links.length === 0) {
+      alert("No links to remove.");
+      return;
+    }
+
+    let index;
+    do {
+      const input = prompt("Enter the index of the link to remove (1 to " + links.length + "):");
+      if (input === null) return;
+      index = parseInt(input);
+    } while (isNaN(index) || index < 1 || index > links.length);
+
+    links.splice(index - 1, 1);
+    alert("Link removed successfully!");
+  }
+
+  function startSocialNewsProgram() {
+    let choice;
+    do {
+      choice = prompt("Choose an action:\n1. Show links\n2. Add a new link\n3. Remove an existing link\n4. Quit");
+      if (choice === null) break;
+
+      switch (choice.trim()) {
+        case "1": showLinks(); break;
+        case "2": addLink(); break;
+        case "3": removeLink(); break;
+        case "4": alert("Goodbye!"); return;
+        default: alert("Invalid choice. Please try again.");
+      }
+    } while (true);
+  }
+</script>
+
+</body>
+</html>
