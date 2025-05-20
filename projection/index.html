@@ -5,6 +5,42 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="assets/css/main.css">
+  <style>
+    .slider-container {
+      max-width: 800px;
+      margin: 40px auto;
+      position: relative;
+      overflow: hidden;
+      border: 8px solid #fff;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .slide {
+      min-width: 100%;
+    }
+    .slide img {
+      width: 100%;
+      height: auto;
+    }
+    .controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    .control {
+      background-color: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
@@ -19,12 +55,10 @@
       <a href="generic.html">Generic</a>
       <a href="elements.html">Calculator</a>
       <a href="about.html">About Us</a>
-
     </nav>
     <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
   </div>
 </header>
- 		
 
 <!-- Banner -->
 <section id="banner">
@@ -55,8 +89,25 @@
   </div>
 </section>
 
-<!-- Other sections ... -->
-<!-- Keep your slider and other content as-is -->
+<!-- Gallery Section -->
+<section class="wrapper align-center">
+  <div class="inner">
+    <h2>Wedding Photo Gallery</h2>
+    <p>Swipe through some of our favorite wedding moments.</p>
+    <div class="slider-container">
+      <div class="slides" id="slides">
+        <div class="slide"><img src="images/slide1.jpg" alt="Wedding 1"></div>
+        <div class="slide"><img src="images/slide2.jpg" alt="Wedding 2"></div>
+        <div class="slide"><img src="images/slide3.jpg" alt="Wedding 3"></div>
+        <div class="slide"><img src="images/slide4.jpg" alt="Wedding 4"></div>
+      </div>
+      <div class="controls">
+        <button class="control" onclick="prevSlide()">&#10094;</button>
+        <button class="control" onclick="nextSlide()">&#10095;</button>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Footer -->
 <footer id="footer">
@@ -83,7 +134,7 @@
 </footer>
 
 <div class="copyright">
-   <a href=/"></a>
+  <a href="/">© 2025 A Sophisticated Photography Business</a>
 </div>
 
 <!-- Scripts -->
@@ -91,6 +142,27 @@
 <script src="assets/js/skel.min.js"></script>
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
+
+<!-- Slider Script -->
+<script>
+  let currentIndex = 0;
+  const slides = document.getElementById('slides');
+  const totalSlides = slides.children.length;
+
+  function updateSlidePosition() {
+    slides.style.transform = 'translateX(' + (-currentIndex * 100) + '%)';
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    updateSlidePosition();
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    updateSlidePosition();
+  }
+</script>
 
 <!-- Social News Script -->
 <script>
@@ -146,27 +218,15 @@
   function startSocialNewsProgram() {
     let choice;
     do {
-      choice = prompt(
-        "Choose an action:\n1. Show links\n2. Add a new link\n3. Remove an existing link\n4. Quit"
-      );
-
+      choice = prompt("Choose an action:\n1. Show links\n2. Add a new link\n3. Remove an existing link\n4. Quit");
       if (choice === null) break;
 
       switch (choice.trim()) {
-        case "1":
-          showLinks();
-          break;
-        case "2":
-          addLink();
-          break;
-        case "3":
-          removeLink();
-          break;
-        case "4":
-          alert("Goodbye!");
-          return;
-        default:
-          alert("Invalid choice. Please try again.");
+        case "1": showLinks(); break;
+        case "2": addLink(); break;
+        case "3": removeLink(); break;
+        case "4": alert("Goodbye!"); return;
+        default: alert("Invalid choice. Please try again.");
       }
     } while (true);
   }
@@ -174,3 +234,4 @@
 
 </body>
 </html>
+
